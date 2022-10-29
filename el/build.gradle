@@ -1,10 +1,10 @@
 plugins {
-  id 'com.android.library'
-  id 'org.jetbrains.kotlin.android'
+  alias libs.plugins.com.android.library
+  alias libs.plugins.org.jetbrains.kotlin.android
 }
 
 android {
-  namespace 'com.template.el'
+  namespace "com.template.el"
   compileSdk 33
 
   defaultConfig {
@@ -12,13 +12,13 @@ android {
     targetSdk 33
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    consumerProguardFiles "consumer-rules.pro"
+    consumerProguardFiles("consumer-rules.pro")
   }
 
   buildTypes {
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+      proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
     }
   }
   compileOptions {

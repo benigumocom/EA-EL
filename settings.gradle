@@ -13,5 +13,6 @@ dependencyResolutionManagement {
   }
 }
 rootProject.name = "EA"
-include ':app'
-include ':el'
+include ":app"
+include ":el"
+
