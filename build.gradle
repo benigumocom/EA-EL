@@ -1,8 +1,8 @@
 plugins {
-  alias libs.plugins.com.android.application  apply false
-  alias libs.plugins.com.android.library  apply false
-  alias libs.plugins.org.jetbrains.kotlin.android  apply false
+  alias libs.plugins.android.application apply false
+  alias libs.plugins.android.library apply false
+  alias libs.plugins.kotlin.android apply false
 
-  alias libs.plugins.com.github.ben.manes.versions  apply false
-  alias libs.plugins.nl.littlerobots.version.catalog.update  apply false
+  alias libs.plugins.ben.manes.versions
+  alias libs.plugins.version.catalog.update
 }

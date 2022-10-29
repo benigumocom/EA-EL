@@ -1,6 +1,6 @@
 plugins {
-  id 'com.android.application'
-  id 'org.jetbrains.kotlin.android'
+  alias libs.plugins.android.application
+  alias libs.plugins.kotlin.android
 }
 
 android {
@@ -37,11 +37,11 @@ dependencies {
   //implementation files('my_path/my_lib.aar')
   //implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
 
-  implementation libs.androidx.core.core.ktx
+  implementation libs.androidx.core.ktx
   implementation libs.androidx.appcompat
-  implementation libs.com.google.android.material
+  implementation libs.google.android.material
   implementation libs.androidx.constraintlayout
   testImplementation libs.junit
   androidTestImplementation libs.androidx.test.ext.junit
-  androidTestImplementation libs.androidx.test.espresso.espresso.core
+  androidTestImplementation libs.androidx.test.espresso.core
 }

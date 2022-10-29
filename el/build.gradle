@@ -1,6 +1,6 @@
 plugins {
-  alias libs.plugins.com.android.library
-  alias libs.plugins.org.jetbrains.kotlin.android
+  alias libs.plugins.android.library
+  alias libs.plugins.kotlin.android
 }
 
 android {
@@ -31,11 +31,11 @@ android {
 }
 
 dependencies {
-  implementation libs.androidx.core.core.ktx
+  implementation libs.androidx.core.ktx
   implementation libs.androidx.appcompat
-  implementation libs.com.google.android.material
+  implementation libs.google.android.material
 
   testImplementation libs.junit
   androidTestImplementation libs.androidx.test.ext.junit
-  androidTestImplementation libs.androidx.test.espresso.espresso.core
+  androidTestImplementation libs.androidx.test.espresso.core
 }
