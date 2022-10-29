@@ -1,9 +1,8 @@
 [versions]
 android-gradle-plugin = "7.3.1"
-androidx-appcompat = "1.7.0-alpha01"
 
 [libraries]
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-appcompat = "androidx.appcompat:appcompat:1.7.0-alpha01"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.2.0-alpha04"
 androidx-core-ktx = "androidx.core:core-ktx:1.9.0"
 androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.5.0-rc01"
