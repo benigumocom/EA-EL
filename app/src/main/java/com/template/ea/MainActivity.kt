@@ -6,19 +6,14 @@ import android.os.PowerManager.WakeLock
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
 
+// https://github.com/googlearchive/android-AccelerometerPlay/blob/master/app/src/main/java/com/example/android/accelerometerplay/AccelerometerPlayActivity.java
 
 class MainActivity : AppCompatActivity() {
-  // https://github.com/googlearchive/android-AccelerometerPlay/blob/master/app/src/main/java/com/example/android/accelerometerplay/AccelerometerPlayActivity.java
 
   private lateinit var playView: MainView
-  private lateinit var wakeLock: WakeLock
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    wakeLock = getSystemService<PowerManager>()!!.newWakeLock(
-      PowerManager.SCREEN_BRIGHT_WAKE_LOCK, javaClass.name
-    )
 
     playView = MainView(this).apply {
       setBackgroundResource(R.drawable.wood)
@@ -32,11 +27,8 @@ class MainActivity : AppCompatActivity() {
   }
 
   override fun onPause() {
-    super.onPause()
     playView.stop()
-    if (wakeLock.isHeld) {
-      wakeLock.release()
-    }
+    super.onPause()
   }
 
 }

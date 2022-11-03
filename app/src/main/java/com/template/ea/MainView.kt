@@ -50,23 +50,10 @@ class MainView(
 
   init {
 
-    //mAccelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-    //val metrics = DisplayMetrics()
-    //mWindowManager?.defaultDisplay?.getMetrics(metrics)
+    val metrics = resources.displayMetrics
 
-    val metrics = DisplayMetrics()
-
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-      @Suppress("DEPRECATION")
-      display?.getRealMetrics(metrics)
-    } else {
-      @Suppress("DEPRECATION")
-      display.getMetrics(metrics)
-    }
-
-
-    xDpi = 393F //metrics.xdpi
-    yDpi = 800F //metrics.ydpi
+    xDpi = metrics.xdpi
+    yDpi = metrics.ydpi
     metersToPixelsX = xDpi / 0.0254f
     metersToPixelsY = yDpi / 0.0254f
 

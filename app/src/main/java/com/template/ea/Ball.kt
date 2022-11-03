@@ -7,6 +7,7 @@ class Ball(context: Context) : View(context) {
 
   var posX = Math.random().toFloat()
   var posY = Math.random().toFloat()
+
   private var velX = 0f
   private var velY = 0f
 
