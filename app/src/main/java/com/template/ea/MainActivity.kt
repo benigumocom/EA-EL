@@ -10,7 +10,7 @@ import androidx.core.content.getSystemService
 class MainActivity : AppCompatActivity() {
   // https://github.com/googlearchive/android-AccelerometerPlay/blob/master/app/src/main/java/com/example/android/accelerometerplay/AccelerometerPlayActivity.java
 
-  private lateinit var playView: PlayView
+  private lateinit var playView: MainView
   private lateinit var wakeLock: WakeLock
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
       PowerManager.SCREEN_BRIGHT_WAKE_LOCK, javaClass.name
     )
 
-    playView = PlayView(this).apply {
+    playView = MainView(this).apply {
       setBackgroundResource(R.drawable.wood)
     }
     setContentView(playView)

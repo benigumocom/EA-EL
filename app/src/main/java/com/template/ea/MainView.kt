@@ -9,7 +9,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.DisplayMetrics
-import android.view.Surface
 import android.view.Surface.ROTATION_0
 import android.view.Surface.ROTATION_180
 import android.view.Surface.ROTATION_270
@@ -18,7 +17,7 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.content.getSystemService
 
-class PlayView(
+class MainView(
   context: Context
 ) : FrameLayout(context), SensorEventListener {
 

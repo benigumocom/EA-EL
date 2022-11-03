@@ -5,7 +5,7 @@ import android.widget.FrameLayout
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class BallSystem(view: PlayView, width: Int, height: Int) {
+class BallSystem(view: MainView, width: Int, height: Int) {
 
   private var last = 0L
   val balls = List(NUM_BALLS) { Ball(view.context) }
@@ -48,12 +48,12 @@ class BallSystem(view: PlayView, width: Int, height: Int) {
           var dx = ball.posX - curr.posX
           var dy = ball.posY - curr.posY
           var dd = dx * dx + dy * dy
-          if (dd <= PlayView.DIAMETER.pow(2)) {
+          if (dd <= MainView.DIAMETER.pow(2)) {
             dx += (Math.random().toFloat() - 0.5f) * 0.0001f
             dy += (Math.random().toFloat() - 0.5f) * 0.0001f
             dd = dx * dx + dy * dy
             val d = sqrt(dd.toDouble()).toFloat()
-            val c = 0.5f * (PlayView.DIAMETER - d) / d
+            val c = 0.5f * (MainView.DIAMETER - d) / d
             val effectX = dx * c
             val effectY = dy * c
             curr.posX -= effectX
