@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
 //    setContentView(R.layout.activity_main)
 //  }
 
+
+  // https://github.com/googlearchive/android-AccelerometerPlay/blob/master/app/src/main/java/com/example/android/accelerometerplay/AccelerometerPlayActivity.java
+
   private var mSimulationView: SimulationView? = null
   private var mSensorManager: SensorManager? = null
   private var mPowerManager: PowerManager? = null
