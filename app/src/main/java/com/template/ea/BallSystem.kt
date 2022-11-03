@@ -3,11 +3,12 @@ package com.template.ea
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import kotlin.math.pow
+import kotlin.math.sqrt
 
-class ParticleSystem(view: SimulationView, width: Int, height: Int) {
+class BallSystem(view: PlayView, width: Int, height: Int) {
 
   private var last = 0L
-  val balls = List(NUM_PARTICLES) { Particle(view.context) }
+  val balls = List(NUM_BALLS) { Ball(view.context) }
 
   init {
     balls.forEach { ball ->
@@ -23,7 +24,7 @@ class ParticleSystem(view: SimulationView, width: Int, height: Int) {
     if (last != 0L) {
       val delta = (current - last).toFloat() / 1000f
       balls.forEach { ball ->
-        ball.computePhysics(sx, sy, delta)
+        ball.compute(sx, sy, delta)
       }
     }
     last = current
@@ -47,12 +48,12 @@ class ParticleSystem(view: SimulationView, width: Int, height: Int) {
           var dx = ball.posX - curr.posX
           var dy = ball.posY - curr.posY
           var dd = dx * dx + dy * dy
-          if (dd <= SimulationView.DIAMETER.pow(2)) {
+          if (dd <= PlayView.DIAMETER.pow(2)) {
             dx += (Math.random().toFloat() - 0.5f) * 0.0001f
             dy += (Math.random().toFloat() - 0.5f) * 0.0001f
             dd = dx * dx + dy * dy
-            val d = Math.sqrt(dd.toDouble()).toFloat()
-            val c = 0.5f * (SimulationView.DIAMETER - d) / d
+            val d = sqrt(dd.toDouble()).toFloat()
+            val c = 0.5f * (PlayView.DIAMETER - d) / d
             val effectX = dx * c
             val effectY = dy * c
             curr.posX -= effectX
@@ -62,13 +63,13 @@ class ParticleSystem(view: SimulationView, width: Int, height: Int) {
             more = true
           }
         }
-        curr.resolveCollisionWithBounds(horizontalBound, verticalBound)
+        curr.limit(horizontalBound, verticalBound)
       }
       k++
     }
   }
 
   companion object {
-    const val NUM_PARTICLES = 5
+    const val NUM_BALLS = 5
   }
 }

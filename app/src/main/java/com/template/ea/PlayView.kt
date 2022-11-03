@@ -9,12 +9,12 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.DisplayMetrics
-import android.view.Display
 import android.view.Surface
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.core.content.getSystemService
 
-class SimulationView(
+class PlayView(
   context: Context
 ) : FrameLayout(context), SensorEventListener {
 
@@ -31,30 +31,22 @@ class SimulationView(
   private var sensorY = 0f
   private var horizontalBound = 0f
   private var verticalBound = 0f
-  private val particleSystem: ParticleSystem
+  private val ballSystem: BallSystem
 
-  private var mSensorManager: SensorManager? = null
-  private var mDisplay: Display? = null
-  private var mWindowManager: WindowManager? = null
+  private var sensorManager = context.getSystemService<SensorManager>()!!
+  private var windowManager = context.getSystemService<WindowManager>()!!
 
-  fun startSimulation(sensorManager: SensorManager, windowManager: WindowManager,display: Display) {
-    mSensorManager = sensorManager
-    mWindowManager = windowManager
-    mDisplay = display
-
-    accelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-    mSensorManager!!.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME)
+  fun start() {
+    accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME)
   }
 
-  fun stopSimulation() {
-    mSensorManager?.unregisterListener(this)
-
-    mSensorManager = null
-    mWindowManager = null
-    mDisplay = null
+  fun stop() {
+    sensorManager.unregisterListener(this)
   }
 
   init {
+
     //mAccelerometer = mSensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     //val metrics = DisplayMetrics()
     //mWindowManager?.defaultDisplay?.getMetrics(metrics)
@@ -78,7 +70,7 @@ class SimulationView(
     // rescale the ball so it's about 0.5 cm on screen
     dstWidth = (DIAMETER * metersToPixelsX + 0.5f).toInt()
     dstHeight = (DIAMETER * metersToPixelsY + 0.5f).toInt()
-    particleSystem = ParticleSystem(this, dstWidth, dstHeight)//, mHorizontalBound, mVerticalBound)
+    ballSystem = BallSystem(this, dstWidth, dstHeight)//, mHorizontalBound, mVerticalBound)
     val opts = BitmapFactory.Options()
     opts.inDither = true
     opts.inPreferredConfig = Bitmap.Config.RGB_565
@@ -93,7 +85,7 @@ class SimulationView(
 
   override fun onSensorChanged(event: SensorEvent) {
     if (event.sensor.type != Sensor.TYPE_ACCELEROMETER) return
-    when (mDisplay?.rotation) {
+    when (display?.rotation) {
       Surface.ROTATION_0 -> {
         sensorX = event.values[0]
         sensorY = event.values[1]
@@ -113,7 +105,7 @@ class SimulationView(
     }
   }
 
-  override fun onDraw(canvas: Canvas?) = with (particleSystem) {
+  override fun onDraw(canvas: Canvas?) = with (ballSystem) {
     update(sensorX, sensorY, System.currentTimeMillis(), horizontalBound, verticalBound)
     balls.forEach { ball ->
       ball.apply {
