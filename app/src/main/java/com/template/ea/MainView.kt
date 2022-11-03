@@ -1,19 +1,15 @@
 package com.template.ea
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.DisplayMetrics
 import android.view.Surface.ROTATION_0
 import android.view.Surface.ROTATION_180
 import android.view.Surface.ROTATION_270
 import android.view.Surface.ROTATION_90
-import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.content.getSystemService
 
@@ -21,23 +17,22 @@ class MainView(
   context: Context
 ) : FrameLayout(context), SensorEventListener {
 
-  private val dstWidth: Int
-  private val dstHeight: Int
   private lateinit var accelerometer: Sensor
-  private val xDpi: Float
-  private val yDpi: Float
-  private val metersToPixelsX: Float
-  private val metersToPixelsY: Float
-  private var xOrigin = 0f
-  private var yOrigin = 0f
   private var sensorX = 0f
   private var sensorY = 0f
-  private var horizontalBound = 0f
-  private var verticalBound = 0f
+
+  private val ballW: Int
+  private val ballH: Int
+  private val pX: Float
+  private val pY: Float
+  private var centerX = 0f
+  private var centerY = 0f
+  private var boundX = 0f
+  private var boundY = 0f
+
   private val ballSystem: BallSystem
 
   private val sensorManager = context.getSystemService<SensorManager>()!!
-  private val windowManager = context.getSystemService<WindowManager>()!!
 
   fun start() {
     accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -51,26 +46,24 @@ class MainView(
   init {
 
     val metrics = resources.displayMetrics
-
-    xDpi = metrics.xdpi
-    yDpi = metrics.ydpi
-    metersToPixelsX = xDpi / 0.0254f
-    metersToPixelsY = yDpi / 0.0254f
+    pX = metrics.xdpi / 0.0254f
+    pY = metrics.ydpi / 0.0254f
 
     // rescale the ball so it's about 0.5 cm on screen
-    dstWidth = (DIAMETER * metersToPixelsX + 0.5f).toInt()
-    dstHeight = (DIAMETER * metersToPixelsY + 0.5f).toInt()
-    ballSystem = BallSystem(this, dstWidth, dstHeight)//, mHorizontalBound, mVerticalBound)
-    val opts = BitmapFactory.Options()
-    opts.inDither = true
-    opts.inPreferredConfig = Bitmap.Config.RGB_565
+    ballW = (DIAMETER * pX + 0.5f).toInt()
+    ballH = (DIAMETER * pY + 0.5f).toInt()
+
+    ballSystem = BallSystem(this, ballW, ballH)
+//    val opts = BitmapFactory.Options()
+//    opts.inDither = true
+//    opts.inPreferredConfig = Bitmap.Config.RGB_565
   }
 
   override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-    xOrigin = (w - dstWidth) * 0.5f
-    yOrigin = (h - dstHeight) * 0.5f
-    horizontalBound = (w / metersToPixelsX - DIAMETER) * 0.5f
-    verticalBound = (h / metersToPixelsY - DIAMETER) * 0.5f
+    centerX = (w - ballW) / 2f
+    centerY = (h - ballH) / 2f
+    boundX = (w / pX - DIAMETER) / 2f
+    boundY = (h / pY - DIAMETER) / 2f
   }
 
   override fun onSensorChanged(event: SensorEvent) {
@@ -82,27 +75,29 @@ class MainView(
       }
       ROTATION_90 -> {
         sensorX = -event.values[1]
-        sensorY = event.values[0]
+        sensorY =  event.values[0]
       }
       ROTATION_180 -> {
         sensorX = -event.values[0]
         sensorY = -event.values[1]
       }
       ROTATION_270 -> {
-        sensorX = event.values[1]
+        sensorX =  event.values[1]
         sensorY = -event.values[0]
       }
     }
   }
 
   override fun onDraw(canvas: Canvas?) = with (ballSystem) {
-    update(sensorX, sensorY, System.currentTimeMillis(), horizontalBound, verticalBound)
+    update(sensorX, sensorY, System.currentTimeMillis(), boundX, boundY)
+
     balls.forEach { ball ->
       ball.apply {
-        translationX = xOrigin + posX * metersToPixelsX
-        translationY = yOrigin - posY * metersToPixelsY
+        translationX = centerX + posX * pX
+        translationY = centerY - posY * pY
       }
     }
+
     invalidate()
   }
 
