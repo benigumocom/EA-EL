@@ -10,6 +10,10 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.DisplayMetrics
 import android.view.Surface
+import android.view.Surface.ROTATION_0
+import android.view.Surface.ROTATION_180
+import android.view.Surface.ROTATION_270
+import android.view.Surface.ROTATION_90
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.content.getSystemService
@@ -33,8 +37,8 @@ class PlayView(
   private var verticalBound = 0f
   private val ballSystem: BallSystem
 
-  private var sensorManager = context.getSystemService<SensorManager>()!!
-  private var windowManager = context.getSystemService<WindowManager>()!!
+  private val sensorManager = context.getSystemService<SensorManager>()!!
+  private val windowManager = context.getSystemService<WindowManager>()!!
 
   fun start() {
     accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
@@ -86,19 +90,19 @@ class PlayView(
   override fun onSensorChanged(event: SensorEvent) {
     if (event.sensor.type != Sensor.TYPE_ACCELEROMETER) return
     when (display?.rotation) {
-      Surface.ROTATION_0 -> {
+      ROTATION_0 -> {
         sensorX = event.values[0]
         sensorY = event.values[1]
       }
-      Surface.ROTATION_90 -> {
+      ROTATION_90 -> {
         sensorX = -event.values[1]
         sensorY = event.values[0]
       }
-      Surface.ROTATION_180 -> {
+      ROTATION_180 -> {
         sensorX = -event.values[0]
         sensorY = -event.values[1]
       }
-      Surface.ROTATION_270 -> {
+      ROTATION_270 -> {
         sensorX = event.values[1]
         sensorY = -event.values[0]
       }
