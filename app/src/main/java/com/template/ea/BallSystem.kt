@@ -54,8 +54,8 @@ class BallSystem(view: MainView, width: Int, height: Int) {
             var d2 = dx.pow(2) + dy.pow(2)
 
             if (d2 <= MainView.DIAMETER.pow(2)) { // collision
-              dx += (Math.random().toFloat() / 2) / 10000
-              dy += (Math.random().toFloat() / 2) / 10000
+              dx += Math.random().toFloat() / 2 / 10000
+              dy += Math.random().toFloat() / 2 / 10000
               d2 = dx.pow(2) + dy.pow(2)
 
               val d = sqrt(d2.toDouble()).toFloat()
