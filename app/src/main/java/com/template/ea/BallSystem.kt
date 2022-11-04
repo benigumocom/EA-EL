@@ -30,9 +30,13 @@ class BallSystem(view: MainView, width: Int, height: Int) {
     last = current
   }
 
-  fun update(sx: Float, sy: Float, now: Long, horizontalBound: Float, verticalBound: Float) {
+  fun update(sx: Float, sy: Float, now: Long, boundX: Float, boundY: Float) {
 
     updatePositions(sx, sy, now)
+
+
+    // 【当たり判定】円と円の当たり
+    //  https://yttm-work.jp/collision/collision_0002.html
 
     val maxIterations = 10
 
@@ -41,29 +45,37 @@ class BallSystem(view: MainView, width: Int, height: Int) {
     var k = 0
     while (k < maxIterations && more) {
       more = false
+
       for (i in 0 until count) {
-        val curr = balls[i]
+        val ballA = balls[i]
+
         for (j in i + 1 until count) {
-          val ball = balls[j]
-          var dx = ball.posX - curr.posX
-          var dy = ball.posY - curr.posY
-          var dd = dx * dx + dy * dy
-          if (dd <= MainView.DIAMETER.pow(2)) {
+          //println("k = $k, more = $more, i = $i, j = $j")
+
+          val ballB = balls[j]
+          var dx = ballB.posX - ballA.posX
+          var dy = ballB.posY - ballA.posY
+          var d2 = dx.pow(2) + dy.pow(2)
+
+          if (d2 <= MainView.DIAMETER.pow(2)) { // collision
             dx += (Math.random().toFloat() - 0.5f) * 0.0001f
             dy += (Math.random().toFloat() - 0.5f) * 0.0001f
-            dd = dx * dx + dy * dy
-            val d = sqrt(dd.toDouble()).toFloat()
-            val c = 0.5f * (MainView.DIAMETER - d) / d
+            d2 = dx.pow(2) + dy.pow(2)
+
+            val d = sqrt(d2.toDouble()).toFloat()
+            val c = (MainView.DIAMETER - d) / d / 2f
             val effectX = dx * c
             val effectY = dy * c
-            curr.posX -= effectX
-            curr.posY -= effectY
-            ball.posX += effectX
-            ball.posY += effectY
+
+            ballA.posX -= effectX
+            ballA.posY -= effectY
+            ballB.posX += effectX
+            ballB.posY += effectY
+
             more = true
           }
         }
-        curr.limit(horizontalBound, verticalBound)
+        ballA.limit(boundX, boundY)
       }
       k++
     }
