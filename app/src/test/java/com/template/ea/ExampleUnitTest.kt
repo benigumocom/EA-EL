@@ -14,4 +14,19 @@ class ExampleUnitTest {
   fun addition_isCorrect() {
     assertEquals(4, 2 + 2)
   }
+
+  @Test
+  fun salesman() {
+
+    val countries = listOf("brazil", "italy", "england", "spain", "japan")
+    val indices = countries.indices
+    indices.forEach { left ->
+      indices.forEach { right ->
+        if (left < right) {
+          println("${countries[left]}\tvs\t${countries[right]}")
+        }
+      }
+    }
+
+  }
 }

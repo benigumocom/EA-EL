@@ -34,45 +34,42 @@ class BallSystem(view: MainView, width: Int, height: Int) {
 
     updatePositions(sx, sy, now)
 
-
-    // 【当たり判定】円と円の当たり
-    //  https://yttm-work.jp/collision/collision_0002.html
-
-    val maxIterations = 10
-
-    var more = true
-    val count = balls.size
     var k = 0
-    while (k < maxIterations && more) {
+    var more = true
+    val indices = balls.indices
+
+    while (k < ITERATIONS && more) {
       more = false
 
-      for (i in 0 until count) {
-        val ballA = balls[i]
+      indices.forEach { a ->
+        val ballA = balls[a]
+        indices.forEach { b ->
+          if (a < b) {
 
-        for (j in i + 1 until count) {
-          //println("k = $k, more = $more, i = $i, j = $j")
+            // 【当たり判定】円と円の当たり
+            //  https://yttm-work.jp/collision/collision_0002.html
+            val ballB = balls[b]
+            var dx = ballB.posX - ballA.posX
+            var dy = ballB.posY - ballA.posY
+            var d2 = dx.pow(2) + dy.pow(2)
 
-          val ballB = balls[j]
-          var dx = ballB.posX - ballA.posX
-          var dy = ballB.posY - ballA.posY
-          var d2 = dx.pow(2) + dy.pow(2)
+            if (d2 <= MainView.DIAMETER.pow(2)) { // collision
+              dx += (Math.random().toFloat() - 0.5f) * 0.0001f
+              dy += (Math.random().toFloat() - 0.5f) * 0.0001f
+              d2 = dx.pow(2) + dy.pow(2)
 
-          if (d2 <= MainView.DIAMETER.pow(2)) { // collision
-            dx += (Math.random().toFloat() - 0.5f) * 0.0001f
-            dy += (Math.random().toFloat() - 0.5f) * 0.0001f
-            d2 = dx.pow(2) + dy.pow(2)
+              val d = sqrt(d2.toDouble()).toFloat()
+              val c = (MainView.DIAMETER - d) / d / 2f
+              val effectX = dx * c
+              val effectY = dy * c
 
-            val d = sqrt(d2.toDouble()).toFloat()
-            val c = (MainView.DIAMETER - d) / d / 2f
-            val effectX = dx * c
-            val effectY = dy * c
+              ballA.posX -= effectX
+              ballA.posY -= effectY
+              ballB.posX += effectX
+              ballB.posY += effectY
 
-            ballA.posX -= effectX
-            ballA.posY -= effectY
-            ballB.posX += effectX
-            ballB.posY += effectY
-
-            more = true
+              more = true
+            }
           }
         }
         ballA.limit(boundX, boundY)
@@ -82,6 +79,7 @@ class BallSystem(view: MainView, width: Int, height: Int) {
   }
 
   companion object {
-    const val NUM_BALLS = 5
+    private const val NUM_BALLS = 10
+    private const val ITERATIONS = 10
   }
 }
