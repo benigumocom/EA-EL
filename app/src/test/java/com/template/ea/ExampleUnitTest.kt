@@ -19,14 +19,25 @@ class ExampleUnitTest {
   fun salesman() {
 
     val countries = listOf("brazil", "italy", "england", "spain", "japan")
+    val games = mutableListOf<String>()
+
     val indices = countries.indices
     indices.forEach { left ->
       indices.forEach { right ->
         if (left < right) {
-          println("${countries[left]}\tvs\t${countries[right]}")
+          games.add("${countries[left]}\tvs\t${countries[right]}")
         }
       }
     }
+
+    games.forEachIndexed() { index, game ->
+      println("${index + 1}. $game")
+    }
+    println("All ${games.size} games")
+
+    assertTrue(
+      countries.size * (countries.size - 1) / 2 == games.size
+    )
 
   }
 }
