@@ -21,14 +21,24 @@ class ExampleUnitTest {
     val countries = listOf("brazil", "italy", "england", "spain", "japan")
     val games = mutableListOf<String>()
 
-    val indices = countries.indices
-    indices.forEach { left ->
-      indices.forEach { right ->
-        if (left < right) {
-          games.add("${countries[left]}\tvs\t${countries[right]}")
+    countries.indices.apply {
+      forEach { left ->
+        forEach { right ->
+          if (left < right) {
+            games.add("${countries[left]}\tvs\t${countries[right]}")
+          }
         }
       }
     }
+
+//    countries.forEachIndexed { left, leftCountry ->
+//      countries.forEachIndexed { right, rightCountry ->
+//        if (left < right) {
+//          games.add("$leftCountry vs $rightCountry")
+//        }
+//      }
+//    }
+
 
     games.forEachIndexed() { index, game ->
       println("${index + 1}. $game")
