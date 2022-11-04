@@ -70,12 +70,14 @@ class BallSystem(view: MainView, width: Int, height: Int) {
 
               more = true
             }
+
           }
         }
         ballA.limit(boundX, boundY)
       }
       k++
     }
+
   }
 
   companion object {
