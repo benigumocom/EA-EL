@@ -19,17 +19,18 @@ class ExampleUnitTest {
   fun salesman() {
 
     val countries = listOf("brazil", "italy", "england", "spain", "japan")
+
     val games = mutableListOf<String>()
 
-    countries.indices.apply {
-      forEach { left ->
-        forEach { right ->
-          if (left < right) {
-            games.add("${countries[left]}\tvs\t${countries[right]}")
-          }
-        }
-      }
-    }
+//    countries.indices.apply {
+//      forEach { left ->
+//        forEach { right ->
+//          if (left < right) {
+//            games.add("${countries[left]}\tvs\t${countries[right]}")
+//          }
+//        }
+//      }
+//    }
 
 //    countries.forEachIndexed { left, leftCountry ->
 //      countries.forEachIndexed { right, rightCountry ->
@@ -38,6 +39,14 @@ class ExampleUnitTest {
 //        }
 //      }
 //    }
+
+    val rights = countries.toMutableList()
+    countries.forEach { left ->
+      rights.removeFirst()
+      rights.forEach { right ->
+        games.add("$left\tvs\t$right")
+      }
+    }
 
 
     games.forEachIndexed() { index, game ->
