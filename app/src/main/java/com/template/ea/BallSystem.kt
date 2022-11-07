@@ -73,7 +73,7 @@ class BallSystem(view: MainView, width: Int, height: Int) {
 
           }
         }
-        ballA.limit(boundX, boundY)
+        ballA.bound(boundX, boundY)
       }
       k++
     }

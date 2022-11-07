@@ -20,7 +20,7 @@ class Ball(context: Context) : View(context) {
     velY += ay * time
   }
 
-  fun limit(boundX: Float, boundY: Float) {
+  fun bound(boundX: Float, boundY: Float) {
     val x = posX
     val y = posY
     if (x > boundX) {
