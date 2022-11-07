@@ -15,3 +15,16 @@ android-library = { id = "com.android.library", version.ref="android-gradle-plug
 ben-manes-versions = "com.github.ben-manes.versions:0.43.0"
 kotlin-android = "org.jetbrains.kotlin.android:1.7.20"
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
+
+# [versions]
+# key = ""
+
+# [libraries]
+# key = ""
+# key = { module = "", version = "" }
+# key = { module = "", version.ref = "" }
+
+# [plugins]
+# key = ""
+# key = { id = "", version = "" }
+# key = { id = "", version.ref = "" }
