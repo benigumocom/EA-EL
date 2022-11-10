@@ -1,3 +1,4 @@
+
 // live template expression
 // groovyScript(concat(substringBefore(filePath(), fileName()), "inline.groovy"), clipboard());
 
