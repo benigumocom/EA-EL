@@ -3,6 +3,7 @@
 // groovyScript(concat(substringBefore(filePath(), fileName()), "inline.groovy"), clipboard());
 
 def cb = _1
+
 def ls = System.lineSeparator()
 return cb.split(ls).collect { l ->
   def w = l.split("\"", -1)
