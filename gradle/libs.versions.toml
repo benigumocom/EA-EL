@@ -18,6 +18,9 @@ androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core",
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version = "1.1.4-rc01" }
 junit = { module = "junit:junit", version = "4.13.2" }
 
+
+
+
 # [versions]
 # key = ""
 
@@ -30,6 +33,7 @@ junit = { module = "junit:junit", version = "4.13.2" }
 # key = ""
 # key = { id = "", version = "" }
 # key = { id = "", version.ref = "" }
+
 
 
 
