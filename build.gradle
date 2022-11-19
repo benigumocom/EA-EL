@@ -16,14 +16,16 @@ def isNonStable = { String version ->
   return !stableKeyword && !(version ==~ regex)
 }
 
-//tasks.named("dependencyUpdates").configure {
-//  gradleReleaseChannel = "current"
+tasks.named("dependencyUpdates").configure {
+  gradleReleaseChannel = "current"
+  //gradleReleaseChannel = "release-candidate" // default include milestone?
+  //gradleReleaseChannel = "nightly"
 //  rejectVersionIf {
 //    (it.candidate.group == "org.jacoco") && (it.candidate.version != it.currentVersion)
 //        || (it.candidate.name == "kotlin-stdlib-jdk8") && (it.candidate.version != it.currentVersion)
 //        || isNonStable(it.candidate.version) //&& !isNonStable(it.currentVersion)
 //  }
-//}
+}
 
 
 // https://github.com/ben-manes/gradle-versions-plugin
