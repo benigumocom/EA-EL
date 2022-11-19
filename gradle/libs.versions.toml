@@ -10,31 +10,15 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-android" }
 
 ben-manes-versions = { id = "com.github.ben-manes.versions", version = "0.44.0" }
-#version-catalog-update = { id = "nl.littlerobots.version-catalog-update", version = "0.7.0" }
 
 [libraries]
-#android-material = { module = "com.google.android.material:material", version = "1.8.0-alpha02" }
-android-material = { module = "com.google.android.material:material", version = "1.7.0" }
-#androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.0-alpha01" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.5.1" }
+android-material = { module = "com.google.android.material:material", version = "1.8.0-alpha02" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.0-alpha01" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.9.0" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version = "3.5.0" }
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version = "1.1.4" }
 junit = { module = "junit:junit", version = "4.13.2" }
 
-
-# [versions]
-# key = ""
-
-# [libraries]
-# key = ""
-# key = { module = "", version = "" }
-# key = { module = "", version.ref = "" }
-
-# [plugins]
-# key = ""
-# key = { id = "", version = "" }
-# key = { id = "", version.ref = "" }
 
 
 
