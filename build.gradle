@@ -16,8 +16,13 @@ def isNonStable = { String version ->
   return !stableKeyword && !(version ==~ regex)
 }
 
+import static groovy.json.JsonOutput.*
+import static com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+
 tasks.named("dependencyUpdates").configure {
-  gradleReleaseChannel = "current"
+
+  //println prettyPrint(toJson(System.properties))
+  //gradleReleaseChannel = "current"
   //gradleReleaseChannel = "release-candidate" // default include milestone?
   //gradleReleaseChannel = "nightly"
 //  rejectVersionIf {

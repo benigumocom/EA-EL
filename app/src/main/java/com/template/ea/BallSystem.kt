@@ -10,6 +10,7 @@ class BallSystem(view: MainView, width: Int, height: Int) {
   private var last = 0L
   val balls = List(NUM_BALLS) { Ball(view.context) }
 
+
   init {
     balls.forEach { ball ->
       ball.apply {
@@ -19,6 +20,7 @@ class BallSystem(view: MainView, width: Int, height: Int) {
       view.addView(ball, ViewGroup.LayoutParams(width, height))
     }
   }
+
 
   private fun updatePositions(sx: Float, sy: Float, current: Long) {
     if (last != 0L) {
