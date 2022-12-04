@@ -2,38 +2,10 @@ plugins {
   alias libs.plugins.android.application apply false
   alias libs.plugins.android.library apply false
   alias libs.plugins.kotlin.android apply false
-
   alias libs.plugins.ben.manes.versions
-  //alias libs.plugins.version.catalog.update
 }
 
 
-def isNonStable = { String version ->
-  def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it ->
-    version.toUpperCase().contains(it)
-  }
-  def regex = /^[0-9,.v-]+(-r)?$/
-  return !stableKeyword && !(version ==~ regex)
-}
-
-import static groovy.json.JsonOutput.*
-import static com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
-
-tasks.named("dependencyUpdates").configure {
-
-  //println prettyPrint(toJson(System.properties))
-  //gradleReleaseChannel = "current"
-  //gradleReleaseChannel = "release-candidate" // default include milestone?
-  //gradleReleaseChannel = "nightly"
-//  rejectVersionIf {
-//    (it.candidate.group == "org.jacoco") && (it.candidate.version != it.currentVersion)
-//        || (it.candidate.name == "kotlin-stdlib-jdk8") && (it.candidate.version != it.currentVersion)
-//        || isNonStable(it.candidate.version) //&& !isNonStable(it.currentVersion)
-//  }
-}
-
-
-// https://github.com/ben-manes/gradle-versions-plugin
 //tasks.named("dependencyUpdates").configure {
 //  resolutionStrategy {
 //    componentSelection {
