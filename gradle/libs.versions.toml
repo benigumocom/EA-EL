@@ -11,7 +11,7 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-android" }
 
 [libraries]
-android-material = { module = "com.google.android.material:material", version = "1.8.0-alpha02" }
+android-material = { module = "com.google.android.material:material", version = "1.8.0-beta01" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.7.0-alpha01" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.9.0" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version = "3.5.0" }
