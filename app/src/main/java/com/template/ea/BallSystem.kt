@@ -86,4 +86,5 @@ class BallSystem(view: MainView, width: Int, height: Int) {
     private const val NUM_BALLS = 10
     private const val ITERATIONS = 10
   }
+
 }
