@@ -10,6 +10,7 @@ class BallSystem(view: MainView, width: Int, height: Int) {
   private var last = 0L
   val balls = List(NUM_BALLS) { Ball(view.context) }
 
+  // 日本語はどうなってるのか謎です!
 
   init {
     balls.forEach { ball ->
